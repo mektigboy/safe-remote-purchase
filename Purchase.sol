@@ -26,17 +26,17 @@ contract Purchase {
 
   modifier onlyBuyer() {
     if (msg.sender != buyer)
-    revert OnlyBuyer();
+      revert OnlyBuyer();
     _;
   }
   modifier onlySeller() {
     if (msg.sender != seller)
-    revert OnlySeller();
+      revert OnlySeller();
     _;
   }
   modifier inState(State state_) {
     if (state != state_)
-    revert InvalidState();
+      revert InvalidState();
     _;
   }
 
@@ -48,8 +48,9 @@ contract Purchase {
   constructor() payable {
     seller = payable(msg.sender);
     value = msg.value / 2;
+
     if ((2 * value) != msg.value)
-    revert ValueNotEven();
+      revert ValueNotEven();
   }
 
   function abort() external onlySeller inState(State.Created) {
